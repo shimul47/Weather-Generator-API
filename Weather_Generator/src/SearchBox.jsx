@@ -2,12 +2,15 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./SearchBox.css"
 import { useState } from 'react';
+
 export default function SearchBox({updateInfo}){
     let [city,setCity] = useState("")
     let [error,setError] = useState(false)
+
     let getWeatherInfo = async()=>{
         try{
-            let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=9de591f6fb084477af6374a0be7afb9d&units=metric`);
+            const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+            let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
             let jsonRes = await response.json();
             // console.log(jsonRes);
             let result = {
